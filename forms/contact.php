@@ -1,34 +1,43 @@
 <?php
 
-  $receiving_email_address = 'sathyaprakash7@gmail.com';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-  if( file_exists($php_email_form = '../assets/vendor/php-email-form/php-email-form.php' )) {
-    include( $php_email_form );
-  } else {
-    die( 'Unable to load the "PHP Email Form" Library!');
-  }
+    // Replace with your email address
+    $to_email = 'sathyaprakasht7@gmail.com';
 
-  $contact = new PHP_Email_Form;
-  $contact->ajax = true;
-  
-  $contact->to = $receiving_email_address;
-  $contact->from_name = $_POST['name'];
-  $contact->from_email = $_POST['email'];
-  $contact->subject = $_POST['subject'];
+    // Collect form data
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $subject = $_POST['subject'];
+    $message = $_POST['message'];
 
-  // Uncomment below code if you want to use SMTP to send emails. You need to enter your correct SMTP credentials
-  /*
-  $contact->smtp = array(
-    'host' => 'example.com',
-    'username' => 'example',
-    'password' => 'pass',
-    'port' => '587'
-  );
-  */
+    // Basic form validation
+    if (empty($name) || empty($email) || empty($subject) || empty($message)) {
+        echo 'All fields are required.';
+        exit;
+    }
 
-  $contact->add_message( $_POST['name'], 'From');
-  $contact->add_message( $_POST['email'], 'Email');
-  $contact->add_message( $_POST['message'], 'Message', 10);
+    // Compose email message
+    $email_subject = "New Contact Form Submission: $subject";
+    $email_body = "Name: $name\n";
+    $email_body .= "Email: $email\n";
+    $email_body .= "Subject: $subject\n\n";
+    $email_body .= "Message:\n$message";
 
-  echo $contact->send();
+    // Set additional headers
+    $headers = "From: $email\r\n";
+    $headers .= "Reply-To: $email\r\n";
+    $headers .= "Content-Type: text/plain; charset=utf-8\r\n";
+
+    // Send email
+    if (mail($to_email, $email_subject, $email_body, $headers)) {
+        echo 'Message sent successfully.';
+    } else {
+        echo 'Error sending message. Please try again later.';
+    }
+
+} else {
+    echo 'Invalid request method.';
+}
+
 ?>
