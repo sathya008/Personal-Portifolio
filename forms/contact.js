@@ -1,4 +1,4 @@
-// forms/contact.js
+// api/contact.js
 
 const { parse } = require('url');
 const { exec } = require('child_process');
