@@ -2,7 +2,8 @@
   "version": 2,
   "builds": [
     { "src": "/index.html", "use": "@vercel/static" },
-    { "src": "/api/contact.js", "use": "@vercel/node" },
+    { "src": "/forms/contact.php", "use": "@vercel/php" },
+    { "src": "/forms/contact.js", "use": "@vercel/static" },
     {
       "src": "/assets/(.*)",
       "use": "@vercel/static"
