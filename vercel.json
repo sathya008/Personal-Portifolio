@@ -2,18 +2,11 @@
   "version": 2,
   "builds": [
     { "src": "/index.html", "use": "@vercel/static" },
-    { "src": "/forms/contact.php", "use": "@vercel/php" },
     { "src": "/forms/contact.js", "use": "@vercel/node" },
-    { "src": "/assets/css/(.*)", "use": "@vercel/static" },
-    { "src": "/assets/js/(.*)", "use": "@vercel/static" },
-    { "src": "/assets/images/(.*)", "use": "@vercel/static" },
-    { "src": "/assets/vendor/(.*)", "use": "@vercel/static" }
+    { "src": "/assets/(.*)", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/forms/contact.php", "dest": "/forms/contact.js" },
-    { "src": "/assets/css/(.*)", "dest": "/assets/css/$1" },
-    { "src": "/assets/js/(.*)", "dest": "/assets/js/$1" },
-    { "src": "/assets/images/(.*)", "dest": "/assets/images/$1" },
-    { "src": "/assets/vendor/(.*)", "dest": "/assets/vendor/$1" }
+    { "src": "/assets/(.*)", "dest": "/assets/$1" }
   ]
 }
