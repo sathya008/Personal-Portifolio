@@ -2,11 +2,11 @@
   "version": 2,
   "builds": [
     { "src": "/index.html", "use": "@vercel/static" },
-    { "src": "/forms/contact.php", "use": "@vercel/php" },
     { "src": "/forms/contact.js", "use": "@vercel/node" },
     { "src": "/assets/(.*)", "use": "@vercel/static" }
   ],
   "routes": [
+    { "src": "/forms/contact.php", "dest": "/forms/contact.js" },
     { "src": "/assets/(.*)", "dest": "/assets/$1" }
   ]
 }
